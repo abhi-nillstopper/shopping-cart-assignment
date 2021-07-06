@@ -1,0 +1,91 @@
+.top-navigation-bar {
+  height: 17vh;
+  margin-bottom: 1em;
+  box-shadow: 0px 10px 10px;
+  display: flex;
+
+  .main-app-logo {
+    margin-left: 10%;
+    margin-right: 5%;
+    img {
+      height: 13vh;
+    }
+  }
+
+  .nav-item {
+    white-space: nowrap;
+    margin-left: 1em;
+    a {
+      color: black;
+    }
+  }
+
+  .active-nav-link {
+    color: #007bff;
+  }
+
+  .user-controls{
+    margin-left: auto;
+    margin-right: 1%;
+    text-align: center;
+
+    .logout-btn {
+      height: 33%;
+      margin: 1%;
+    }
+  
+    div.cart-svg {
+      position: relative;
+      top: 15%;
+      padding: 0.2em;
+      background-color: #cccbcc;
+      // right: 50%;
+      img{
+        height: 5vh;
+      }
+    }
+  }
+
+  
+}
+
+.page-content {
+}
+
+@media only screen and (max-width: 992px) {
+  .top-navigation-bar {
+    display: unset;
+    .main-app-logo img {
+      height: 10vh;
+    }
+    .user-controls{
+      position: absolute;
+      right: 1%;
+      top: 1%;
+
+      .logout-btn {
+        margin: 5%;
+      }
+
+      div.cart-svg{
+        img{
+
+          height: 4vh;
+        }
+      }
+    }
+
+
+    button.navbar-toggler {
+      margin-right: auto;
+
+      
+    }
+
+    div.navbar-collapse {
+      .nav-item{
+        width: max-content;
+      }
+    }
+  }
+}
