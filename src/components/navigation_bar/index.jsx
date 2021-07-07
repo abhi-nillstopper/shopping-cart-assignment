@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { useHistory, Link, NavLink } from "react-router-dom";
-import { Image, Navbar, Nav, Button } from "react-bootstrap";
+import { Image, Navbar, Nav, Button, Container } from "react-bootstrap";
 import { UserContext } from "../../user-context";
 import Logo_Big from "../../../static/images/logo_2x.png";
 import Logo from "../../../static/images/logo.png";
@@ -33,45 +33,42 @@ export default function NavigationBar(props) {
             <Nav className="ml-auto">
               <Nav.Item>
                 <NavLink activeClassName="active-nav-link" to="/" exact>
-                  Dashboard
+                  Home
                 </NavLink>
               </Nav.Item>
               <Nav.Item>
-                <NavLink activeClassName="active-nav-link" to="/events">
-                  New Event
-                </NavLink>
-              </Nav.Item>
-              <Nav.Item>
-                <NavLink
-                  activeClassName="active-nav-link"
-                  to="/myparticipation"
-                >
-                  My Participation
-                </NavLink>
-              </Nav.Item>
-              <Nav.Item>
-                <NavLink activeClassName="active-nav-link" to="/myrequests">
-                  My Requests
+                <NavLink activeClassName="active-nav-link" to="/products">
+                  products
                 </NavLink>
               </Nav.Item>
             </Nav>
           </Navbar.Collapse>
         </Navbar>
         <div className="user-controls">
-          <Button
-            className="logout-btn"
-            variant="danger"
-            onClick={handleLogout}
-          >
-            Logout
-          </Button>
+          {isLoggedIn ? (
+            <Button
+              className="logout-btn"
+              variant="danger"
+              onClick={handleLogout}
+            >
+              Logout
+            </Button>
+          ) : (
+            <>
+              <Link to="/login">Sign In</Link> &nbsp;
+              <Link to="/register">Register</Link>
+            </>
+          )}
+
           <div className="cart-svg">
             <Image src={Cart} />
-            {numOfItems}&nbsp;items 
+            {numOfItems}&nbsp;items
           </div>
         </div>
       </div>
-      <div className="page-content">{props.children}</div>
+      <Container className="page-content" fluid>
+        {props.children}
+      </Container>
     </>
   );
 }

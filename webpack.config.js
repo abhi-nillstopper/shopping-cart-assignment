@@ -1,17 +1,27 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const webpack = require("webpack");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
+const dotenv = require("dotenv");
 
 module.exports = {
   entry: path.join(__dirname, "src", "index.js"),
   target: "web",
   mode: "development",
-  output: { path: path.join(__dirname, "build"), filename: "index.bundle.js" },
+  output: {
+    path: path.join(__dirname, "build"),
+    filename: "index.bundle.js",
+  },
   mode: process.env.NODE_ENV || "development",
   resolve: {
     modules: [path.resolve(__dirname, "src"), "node_modules"],
     extensions: [".js", ".jsx", ".ts", ".tsx"],
   },
-  devServer: { historyApiFallback: true, contentBase: path.join(__dirname, "src"), hot: true },
+  devServer: {
+    historyApiFallback: true,
+    contentBase: path.join(__dirname, "static"),
+    hot: true,
+  },
   module: {
     rules: [
       {
@@ -36,7 +46,7 @@ module.exports = {
         ],
       },
       {
-        test: /\.(jpg|jpeg|png|gif|mp3|svg)$/,
+        test: /\.(png|svg|jpe?g|gif)$/i,
         use: ["file-loader"],
       },
     ],
@@ -44,6 +54,17 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: path.join(__dirname, "src", "index.html"),
+    }),
+    new webpack.DefinePlugin({
+      "process.env": JSON.stringify(dotenv.config().parsed), // it will automatically pick up key values from .env file
+    }),
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: path.resolve(__dirname + "/static"),
+          to: "static/",
+        },
+      ],
     }),
   ],
 };

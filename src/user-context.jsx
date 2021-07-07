@@ -16,7 +16,6 @@ export const ContextWrapper = (props) => {
   const [numOfItems, setNumOfItems] = useState(0);
 
   const user = { isLoggedIn, setIsLoggedIn, numOfItems, setNumOfItems };
-  console.log(props.children);
 
   return (
     <UserContext.Provider value={user}>{props.children}</UserContext.Provider>

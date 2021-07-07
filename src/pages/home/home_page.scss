@@ -1,0 +1,39 @@
+$shadow-black: 0px 7px 10px;
+
+div.home-container {
+  width: 90%;
+  margin: auto;
+
+  .carousel.slide {
+    box-shadow: $shadow-black;
+    .carousel-control-next-icon,
+    .carousel-control-prev-icon {
+      background-color: black;
+    }
+    .carousel-indicators li {
+      background-color: black;
+    }
+  }
+
+  .product-categories {
+    .category {
+      height: 40vh;
+      margin-top: 1%;
+      box-shadow: $shadow-black;
+      display: flex;
+
+      h2 {
+        font-weight: bold;
+      }
+
+      div.description {
+        margin: auto;
+        text-align: center;
+      }
+    }
+  }
+}
+
+div.category:nth-child(even) {
+  flex-direction: row-reverse;
+}

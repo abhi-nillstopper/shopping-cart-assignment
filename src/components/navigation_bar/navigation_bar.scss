@@ -1,7 +1,7 @@
 .top-navigation-bar {
   height: 17vh;
   margin-bottom: 1em;
-  box-shadow: 0px 10px 10px;
+  box-shadow: 0px 7px 10px;
   display: flex;
 
   .main-app-logo {
@@ -15,6 +15,7 @@
   .nav-item {
     white-space: nowrap;
     margin-left: 1em;
+    font-size: larger;
     a {
       color: black;
     }
@@ -24,41 +25,39 @@
     color: #007bff;
   }
 
-  .user-controls{
+  .user-controls {
     margin-left: auto;
     margin-right: 1%;
     text-align: center;
+
+    a {
+      color: black;
+    }
 
     .logout-btn {
       height: 33%;
       margin: 1%;
     }
-  
+
     div.cart-svg {
       position: relative;
       top: 15%;
       padding: 0.2em;
-      background-color: #cccbcc;
-      // right: 50%;
-      img{
+      background-color: #d9d9d9;
+      img {
         height: 5vh;
       }
     }
   }
-
-  
 }
 
-.page-content {
-}
-
-@media only screen and (max-width: 992px) {
+@media screen and (max-width: 992px) {
   .top-navigation-bar {
     display: unset;
     .main-app-logo img {
       height: 10vh;
     }
-    .user-controls{
+    .user-controls {
       position: absolute;
       right: 1%;
       top: 1%;
@@ -67,23 +66,19 @@
         margin: 5%;
       }
 
-      div.cart-svg{
-        img{
-
+      div.cart-svg {
+        img {
           height: 4vh;
         }
       }
     }
 
-
     button.navbar-toggler {
       margin-right: auto;
-
-      
     }
 
     div.navbar-collapse {
-      .nav-item{
+      .nav-item {
         width: max-content;
       }
     }
