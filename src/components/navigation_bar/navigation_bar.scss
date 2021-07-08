@@ -1,6 +1,6 @@
 .top-navigation-bar {
   height: 17vh;
-  margin-bottom: 1em;
+  margin-bottom: 2em;
   box-shadow: 0px 7px 10px;
   display: flex;
 
@@ -40,6 +40,7 @@
     }
 
     div.cart-svg {
+      cursor: pointer;
       position: relative;
       top: 15%;
       padding: 0.2em;
@@ -49,6 +50,11 @@
       }
     }
   }
+}
+
+.page-content {
+  margin-bottom: 5%;
+  min-height: 32em;
 }
 
 @media screen and (max-width: 992px) {

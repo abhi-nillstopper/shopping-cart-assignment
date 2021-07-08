@@ -1,19 +1,65 @@
 import * as React from "react";
-import { Button, Form } from "react-bootstrap";
-import api from "../../helper/axios_api"
+import { Button, Form, Alert } from "react-bootstrap";
+import { UserContext } from "../../user-context";
+import api from "../../helper/axios_api";
 import "./login_page.scss";
 
 interface LoginPageProps {
-    history: any;
+  history: any;
 }
 
-const LoginPage: React.FC<LoginPageProps> = ({history}): React.ReactElement => {
+const LoginPage: React.FC<LoginPageProps> = ({
+  history,
+}): React.ReactElement => {
+  const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
 
-    const handleSubmit = async (e: Event) =>{
-        e.preventDefault();
+  const [showAlert, setShowAlert] = React.useState(false);
+  const [alertVariant, setAlertVariant] = React.useState("success");
+  const [alertMessage, setAlertMessage] = React.useState("");
 
-        await api.get('https://jsonplaceholder.typicode.com/todos/1')
+  const { isLoggedIn, setIsLoggedIn } = React.useContext(UserContext);
+
+  React.useEffect(() => {
+    isLoggedIn && history.push("/");
+    setShowAlert(true);
+    setAlertMessage("Enter Login credentials");
+  }, []);
+
+  const handleSubmit = async (e: Event) => {
+    e.preventDefault();
+    const response = await api.post("/user/authenticate", {
+      password,
+      email,
+    });
+    const user_id = response.data.user_id || false;
+    const user = response.data.user || false;
+
+    try {
+      if (user_id) {
+        localStorage.setItem("user_id", user_id);
+        localStorage.setItem("user", user);
+        setIsLoggedIn(true);
+        history.push("/");
+      } else {
+        const { message } = response.data;
+        alertHandler(message);
+        alertHandler(message, "danger");
+      }
+    } catch (err) {
+      alertHandler("Error, server returned the error");
     }
+  };
+
+  const alertHandler = (message: string, variant: string = "success") => {
+    setAlertVariant(variant);
+    setShowAlert(true);
+    setAlertMessage(message);
+    setTimeout(() => {
+      setAlertVariant("success");
+      setAlertMessage("Enter Login credentials");
+    }, 2000);
+  };
 
   return (
     <>
@@ -25,16 +71,31 @@ const LoginPage: React.FC<LoginPageProps> = ({history}): React.ReactElement => {
         <Form onSubmit={handleSubmit}>
           <Form.Group controlId="formBasicEmail">
             <Form.Label>Email</Form.Label>
-            <Form.Control type="email" placeholder="Enter email" />
+            <Form.Control
+              type="email"
+              placeholder="Enter email"
+              onChange={(e: any) => setEmail(e.target.value)}
+            />
           </Form.Group>
 
           <Form.Group controlId="formBasicPassword">
             <Form.Label>Password</Form.Label>
-            <Form.Control type="password" placeholder="Password" />
+            <Form.Control
+              type="password"
+              placeholder="Password"
+              onChange={(e: any) => setPassword(e.target.value)}
+            />
           </Form.Group>
           <Button variant="primary" type="submit">
             Login
           </Button>
+          <div className="login-alert-container">
+            {showAlert && (
+              <Alert variant={alertVariant}>
+                <p>{alertMessage}</p>
+              </Alert>
+            )}
+          </div>
         </Form>
       </div>
     </>
