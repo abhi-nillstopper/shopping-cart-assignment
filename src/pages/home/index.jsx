@@ -1,13 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Carousel, Image } from "react-bootstrap";
 import ProductCategory from "./product_category";
-import { importAll } from "../../helper/import_all";
+import { UserContext } from "../../user-context";
+// import { importAll } from "../../helper/import_all";
 import api from "../../helper/axios_api";
 import "./home_page.scss";
 
 export default function HomePage(props) {
   const [OfferImages, setOfferImages] = useState([]);
   const [categoryImages, setCategoryImages] = useState([]);
+  const { isLoggedIn } = useContext(UserContext);
 
   const fetchOfferImages = async () => {
     try {
@@ -28,8 +30,12 @@ export default function HomePage(props) {
   };
 
   useEffect(() => {
-    fetchOfferImages();
-    fetchcategoryImages();
+    if (!isLoggedIn) {
+      props.history.push("/login");
+    } else {
+      fetchOfferImages();
+      fetchcategoryImages();
+    }
   }, []);
 
   // const OfferImages = importAll(
@@ -42,8 +48,8 @@ export default function HomePage(props) {
 
   return (
     <>
-      <div className="home-container">
-        <Carousel fade>
+      <div className="home-container" data-testid="home-container">
+        <Carousel data-testid="carousel-test" fade>
           {OfferImages.map((ofImg, index) => {
             return (
               <Carousel.Item key={index} interval={2000}>
@@ -57,7 +63,7 @@ export default function HomePage(props) {
           })}
         </Carousel>
 
-        <ProductCategory categoryImages={categoryImages} />
+        <ProductCategory history={props.history} categoryImages={categoryImages} />
       </div>
     </>
   );

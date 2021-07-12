@@ -19,6 +19,9 @@
     a {
       color: black;
     }
+    a:focus{
+      color: blue;
+    }
   }
 
   .active-nav-link {

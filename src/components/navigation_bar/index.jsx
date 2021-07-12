@@ -61,15 +61,17 @@ export default function NavigationBar(props) {
             </Button>
           ) : (
             <>
-              <Link to="/login">Sign In</Link> &nbsp;
-              <Link to="/register">Register</Link>
+                <Link to="/login">Sign In</Link> &nbsp;
+                <Link to="/register">Register</Link>
             </>
           )}
 
-          <div className="cart-svg" onClick={toggleModal}>
-            <Image src={Cart} />
-            {numOfItems}&nbsp;items
-          </div>
+          {isLoggedIn && (
+            <div className="cart-svg" onClick={toggleModal}>
+              <Image src={Cart} />
+              {numOfItems}&nbsp;items
+            </div>
+          )}
         </div>
       </div>
       <Container className="page-content" fluid>

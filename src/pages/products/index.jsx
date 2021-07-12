@@ -1,17 +1,25 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import api from "../../helper/axios_api";
+import { UserContext } from "../../user-context";
 import { CategoriesDropdown } from "../../constant/categories";
-import CardComponent from "../../components/card";
+import CardComponent from "../../components/card/index.tsx";
 import { DropdownButton, Dropdown } from "react-bootstrap";
 import "./products_page.scss";
 
 export default function ProductsPage(props) {
   const [products, setProducts] = useState([]);
   const [radioValue, setRadioValue] = useState("");
+  const { isLoggedIn } = useContext(UserContext);
 
   useEffect(() => {
-    const { categoryKey } = props.location.state;
-    setRadioValue(categoryKey);
+    if (!isLoggedIn) {
+      props.history.push("/login");
+    } else {
+      if (props.location.state) {
+        const { categoryKey } = props.location.state;
+        categoryKey && setRadioValue(categoryKey);
+      }
+    }
   }, []);
 
   useEffect(() => {
@@ -41,11 +49,13 @@ export default function ProductsPage(props) {
   return (
     <>
       <div className="product-container">
-        <div className="category-selector">
+        <div className="category-selector" data-testid="category-selector">
           {CategoriesDropdown.map((category, index) => {
             return (
-              <div key={index} onClick={() => OnClickCategory(category.value)}>
-                {category.name}
+              <div key={index}>
+                <a onClick={() => OnClickCategory(category.value)}>
+                  {category.name}
+                </a>
               </div>
             );
           })}
