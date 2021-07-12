@@ -22,6 +22,8 @@ module.exports = {
     contentBase: path.join(__dirname, "static"),
     hot: true,
   },
+  devtool: 'source-map',
+  // moduleDirectories: ["node_modules", "./utils/test-utils.js"],
   module: {
     rules: [
       {

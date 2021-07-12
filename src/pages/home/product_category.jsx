@@ -4,10 +4,10 @@ import { Image, Button } from "react-bootstrap";
 
 export default function ProductCategory(props) {
   const categoryImages = props.categoryImages;
-  const history = useHistory();
+  // const history = useHistory();
 
   const onCategoryClick = (categoryKey) => {
-    history.push("/products", { categoryKey });
+    props.history.push("/products", { categoryKey });
   };
 
   return (
@@ -15,7 +15,7 @@ export default function ProductCategory(props) {
       <div className="product-categories">
         {categoryImages.map((img, index) => {
           return (
-            <div key={img.key} className="category">
+            <div key={img.key} className="category" data-testid="category">
               <Image src={img.imageUrl} />
               <div className="description">
                 <h2>{img.name}</h2>

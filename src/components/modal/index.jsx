@@ -18,7 +18,7 @@ export default function ModalComponent(props) {
   useEffect(() => {
     let user_cart_items = JSON.parse(localStorage.getItem("user_cart_items"));
     setFinalAmount(user_cart_items.reduce(reduceFunc, 0));
-  });
+  },[]);
 
   const [finalAmount, setFinalAmount] = useState(
     user_cart_items.reduce(reduceFunc, 0)
@@ -38,6 +38,7 @@ export default function ModalComponent(props) {
   };
 
   const calcFinalAmount = (newAmount, op = "+") => {
+    console.log(finalAmount, op, newAmount)
     if (op === "+") {
       setFinalAmount(finalAmount + newAmount);
     } else {
@@ -137,11 +138,12 @@ function CartFunctions({ price, calcFinalAmount, handleDelete, name }) {
         >
           -
         </Button>
-        <span>
-          {" "}
-          &nbsp;&nbsp;&nbsp;&nbsp; {counter} &nbsp;&nbsp;&nbsp;&nbsp;
-        </span>
-        <Button className="rounded-btn" onClick={handlePlus}>
+        <span>&nbsp;&nbsp;&nbsp;&nbsp; {counter} &nbsp;&nbsp;&nbsp;&nbsp;</span>
+        <Button
+          disabled={counter === 5}
+          className="rounded-btn"
+          onClick={handlePlus}
+        >
           +
         </Button>
         <span className="delete-svg" onClick={deleteItem}>
