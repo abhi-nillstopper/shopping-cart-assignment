@@ -12,9 +12,9 @@ export const ContextWrapper = (props) => {
   };
 
   const defaultNumOfItems = () => {
-    const numOfItems = localStorage.getItem("numOfProductsInCart");
-    if (numOfItems) {
-      return numOfItems;
+    const userCartItems = JSON.parse(localStorage.getItem("user_cart_items"));
+    if (userCartItems.length > 0) {
+      return userCartItems.length;
     }
     return 0;
   };

@@ -28,14 +28,14 @@ const LoginPage: React.FC<LoginPageProps> = ({
 
   const handleSubmit = async (e: Event) => {
     e.preventDefault();
-    const response = await api.post("/user/authenticate", {
-      password,
-      email,
-    });
-    const user_id = response.data.user_id || false;
-    const user = response.data.user || false;
-
     try {
+      const response = await api.post("/user/authenticate", {
+        password,
+        email,
+      });
+      const user_id = response.data.user_id || false;
+      const user = response.data.user || false;
+
       if (user_id) {
         localStorage.setItem("user_id", user_id);
         localStorage.setItem("user", user);
@@ -68,7 +68,7 @@ const LoginPage: React.FC<LoginPageProps> = ({
           <h1>Login</h1>
           <h5>Get access to your Orders. Wishlist and Recommendation</h5>
         </div>
-        <Form onSubmit={handleSubmit}>
+        <Form data-testid="login-form" onSubmit={handleSubmit}>
           <Form.Group controlId="formBasicEmail">
             <Form.Label>Email</Form.Label>
             <Form.Control

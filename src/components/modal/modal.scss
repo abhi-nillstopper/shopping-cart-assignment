@@ -107,5 +107,42 @@ $left-space-5: 5%;
       margin-right: auto;
       max-width: 80%;
     }
+
+    .modal-body {
+      .cart-items {
+        .induvidual-item {
+          img {
+            width: 50%;
+          }
+          .product-info {
+            width: 50%;
+            div:nth-child(1) {
+              width: 100%;
+
+              h6 {
+                width: 100%;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                overflow: hidden;
+              }
+            }
+            .cart-functions {
+              text-align: center;
+
+              button {
+                margin: auto;
+              }
+              span.delete-svg {
+                img {
+                  height: unset;
+                  width: unset;
+                }
+                margin-left: 1%;
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }
