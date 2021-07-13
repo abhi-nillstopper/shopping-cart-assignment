@@ -53,9 +53,9 @@ export default function ProductsPage(props) {
           {CategoriesDropdown.map((category, index) => {
             return (
               <div key={index}>
-                <a onClick={() => OnClickCategory(category.value)}>
+                <button onClick={() => OnClickCategory(category.value)}>
                   {category.name}
-                </a>
+                </button>
               </div>
             );
           })}

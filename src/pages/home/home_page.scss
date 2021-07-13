@@ -1,11 +1,12 @@
 $shadow-black: 0px 7px 10px;
+$box-shadow-fix: 0px 7px 15px 2px #9f9f9f;
 
 div.home-container {
   width: 90%;
   margin: auto;
 
   .carousel.slide {
-    box-shadow: $shadow-black;
+    box-shadow: $box-shadow-fix;
     .carousel-control-next-icon,
     .carousel-control-prev-icon {
       background-color: black;
@@ -18,8 +19,8 @@ div.home-container {
   .product-categories {
     .category {
       height: 40vh;
-      margin-top: 1%;
-      box-shadow: $shadow-black;
+      margin-top: 2%;
+      box-shadow: $box-shadow-fix;
       display: flex;
 
       img {

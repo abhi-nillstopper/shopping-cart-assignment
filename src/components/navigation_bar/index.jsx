@@ -28,13 +28,13 @@ export default function NavigationBar(props) {
     <>
       <div className="top-navigation-bar">
         <Navbar expand="lg">
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <span className="main-app-logo">
             <Link to="/">
               <Image src={Logo_Big} />
             </Link>
           </span>
 
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ml-auto">
               <Nav.Item>
@@ -61,16 +61,18 @@ export default function NavigationBar(props) {
             </Button>
           ) : (
             <>
-                <Link to="/login">Sign In</Link> &nbsp;
-                <Link to="/register">Register</Link>
+              <Link to="/login">Sign In</Link> &nbsp;
+              <Link to="/register">Register</Link>
             </>
           )}
 
           {isLoggedIn && (
-            <div className="cart-svg" onClick={toggleModal}>
-              <Image src={Cart} />
-              {numOfItems}&nbsp;items
-            </div>
+            <button className="cart-svg" onClick={toggleModal}>
+              <div >
+                <Image src={Cart} />
+                {numOfItems}&nbsp;items
+              </div>
+            </button>
           )}
         </div>
       </div>

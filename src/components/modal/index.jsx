@@ -18,7 +18,7 @@ export default function ModalComponent(props) {
   useEffect(() => {
     let user_cart_items = JSON.parse(localStorage.getItem("user_cart_items"));
     setFinalAmount(user_cart_items.reduce(reduceFunc, 0));
-  },[]);
+  }, []);
 
   const [finalAmount, setFinalAmount] = useState(
     user_cart_items.reduce(reduceFunc, 0)
@@ -38,7 +38,7 @@ export default function ModalComponent(props) {
   };
 
   const calcFinalAmount = (newAmount, op = "+") => {
-    console.log(finalAmount, op, newAmount)
+    console.log(finalAmount, op, newAmount);
     if (op === "+") {
       setFinalAmount(finalAmount + newAmount);
     } else {
@@ -72,9 +72,9 @@ export default function ModalComponent(props) {
               return (
                 <div className="induvidual-item" key={index}>
                   <Image className="item-img" src={item.imageURL} />
-                  <span className="product-info">
+                  <div className="product-info">
                     <div>
-                      <h6>{item.name}</h6>
+                      <h6 title={item.name}>{item.name}</h6>
                     </div>
                     <CartFunctions
                       calcFinalAmount={calcFinalAmount}
@@ -82,7 +82,7 @@ export default function ModalComponent(props) {
                       name={item.name}
                       handleDelete={handleDelete}
                     />
-                  </span>
+                  </div>
                 </div>
               );
             })}
@@ -95,11 +95,7 @@ export default function ModalComponent(props) {
         </Modal.Body>
         <Modal.Footer>
           <div>Promo code can be applied on payment page</div>
-          <Button
-            className="checkout-btn"
-            variant="danger"
-            // onClick={calcFinalAmount}
-          >
+          <Button className="checkout-btn" variant="danger">
             Proceed to Checkout &nbsp;&nbsp;&nbsp; Rs.{finalAmount} &nbsp;
           </Button>
         </Modal.Footer>

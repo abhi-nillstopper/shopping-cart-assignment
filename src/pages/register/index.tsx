@@ -4,11 +4,11 @@ import api from "../../helper/axios_api";
 import { UserContext } from "../../user-context";
 import autoBind from "react-autobind";
 import "./register_page.scss";
-import { any } from "prop-types";
 
 type RegisterPageProps = {
   history: any;
 };
+
 type RegisterPageState = {
   // { [key: string]: any};
   email: string;
@@ -51,14 +51,18 @@ export default class RegisterPage extends React.Component<
   componentDidMount() {
     const context = this.context;
     //It will get the data from context, and put it into the state.
-    this.setState({ isLoggedIn: context.isLoggedIn });
+    if (context.isLoggedIn) {
+      this.props.history.push("/");
+    } else {
+      this.setState({ isLoggedIn: context.isLoggedIn });
+    }
   }
 
   async handleSubmit(e: Event) {
     try {
       e.preventDefault();
       const { firstName, lastName, password, email } = this.state;
-      const { isLoggedIn, setIsLoggedIn } = this.context;
+      const { setIsLoggedIn } = this.context;
       if (
         email !== "" &&
         password !== "" &&
@@ -73,7 +77,6 @@ export default class RegisterPage extends React.Component<
         });
         const user_id = response.data.user_id || false;
         const user = response.data.user || false;
-
         if (user_id && user) {
           localStorage.setItem("user_id", user_id);
           localStorage.setItem("user", user);
@@ -86,7 +89,9 @@ export default class RegisterPage extends React.Component<
       } else {
         this.alertHandler("You need to fill all the inputs", "danger");
       }
-    } catch (error) {}
+    } catch (error) {
+      this.alertHandler(error.message, "danger");
+    }
   }
 
   alertHandler(message: string, variant: string = "success") {
@@ -104,12 +109,10 @@ export default class RegisterPage extends React.Component<
   }
 
   handleOnChange(event: { target: { name: any; value: any } }) {
-    console.log(event.target.name, event.target.value);
     const newState = { [event.target.name]: event.target.value } as Pick<
       RegisterPageState,
       keyof RegisterPageState
     >;
-    console.log(newState);
     this.setState(newState);
   }
 
@@ -131,7 +134,7 @@ export default class RegisterPage extends React.Component<
             <h1>Signup</h1>
             <h5>We do not share your info with anyone.</h5>
           </div>
-          <Form onSubmit={this.handleSubmit}>
+          <Form data-testid="register-form" onSubmit={this.handleSubmit}>
             <Form.Group controlId="formBasicFirstName">
               <Form.Label>First Name</Form.Label>
               <Form.Control

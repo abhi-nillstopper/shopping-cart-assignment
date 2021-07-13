@@ -27,8 +27,9 @@ const Card: React.FC<CardProps> = (props): React.ReactElement => {
         : false;
 
     if (!isItemPresent) {
+      let numOfItemsInt = parseInt(numOfItems) + 1;
       let updatedCart = [...cartItems, { name, imageURL, price }];
-      localStorage.setItem("numOfProductsInCart", numOfItems + 1);
+      localStorage.setItem("numOfProductsInCart", numOfItemsInt.toString());
       localStorage.setItem("user_cart_items", JSON.stringify(updatedCart));
       setNumOfItems(parseInt(numOfItems) + 1);
       setCartItems(updatedCart);
@@ -36,12 +37,12 @@ const Card: React.FC<CardProps> = (props): React.ReactElement => {
       setAlertVariant("success");
       setAlertMessage("Item added in cart successfully");
       setShowAlert(true);
-      setTimeout(() => setShowAlert(false), 1000);
+      setTimeout(() => setShowAlert(false), 1500);
     } else {
       setAlertVariant("danger");
       setShowAlert(true);
-      setAlertMessage("Item already in cart");
-      setTimeout(() => setShowAlert(false), 1000);
+      setAlertMessage("Goto cart, Product already in cart");
+      setTimeout(() => setShowAlert(false), 1500);
     }
   };
 
@@ -49,9 +50,19 @@ const Card: React.FC<CardProps> = (props): React.ReactElement => {
     <>
       <div className="card-container">
         <h6>{name}</h6>
-        <Image src={imageURL} />
-        <div className="card-description">{description}</div>
-
+        <div className="product-image-description">
+          <Image src={imageURL} />
+          <div className="card-description">
+            <div> {description}</div>
+            <Button
+              className="small-screen-btn"
+              variant="danger"
+              onClick={handleBuy}
+            >
+              Buy Now @ <span>MRP Rs. {price}</span>
+            </Button>
+          </div>
+        </div>
         <div className="card-bottom">
           <span>MRP Rs. {price}</span>
           <Button variant="danger" onClick={handleBuy}>
