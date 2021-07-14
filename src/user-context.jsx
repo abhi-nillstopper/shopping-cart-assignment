@@ -13,7 +13,7 @@ export const ContextWrapper = (props) => {
 
   const defaultNumOfItems = () => {
     const userCartItems = JSON.parse(localStorage.getItem("user_cart_items"));
-    if (userCartItems.length > 0) {
+    if (userCartItems && userCartItems.length > 0) {
       return userCartItems.length;
     }
     return 0;
