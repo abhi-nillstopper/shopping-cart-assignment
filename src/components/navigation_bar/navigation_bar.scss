@@ -49,7 +49,7 @@ $box-shadow-fix: 15px 7px 15px 2px #9f9f9f;
     .logout-btn {
       // height: 33%;
       // margin-top: 3%;
-      margin-bottom: 5%;
+      margin-bottom: 10%;
     }
 
     button.cart-svg {
@@ -61,7 +61,7 @@ $box-shadow-fix: 15px 7px 15px 2px #9f9f9f;
       padding: 0.2em;
       background-color: #d9d9d9;
       img {
-        height: 5vh;
+        height: 2.2em;
       }
     }
 
@@ -95,9 +95,9 @@ $box-shadow-fix: 15px 7px 15px 2px #9f9f9f;
         margin: 3%;
       }
 
-      div.cart-svg {
+      button.cart-svg {
         img {
-          height: 4vh;
+          height: 2em;
         }
       }
     }

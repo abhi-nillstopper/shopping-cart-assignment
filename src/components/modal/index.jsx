@@ -134,7 +134,7 @@ function CartFunctions({ price, calcFinalAmount, handleDelete, name }) {
         >
           -
         </Button>
-        <span>&nbsp;&nbsp;&nbsp;&nbsp; {counter} &nbsp;&nbsp;&nbsp;&nbsp;</span>
+        <span data-testid="cart-product-counter">&nbsp;&nbsp;&nbsp;&nbsp; {counter} &nbsp;&nbsp;&nbsp;&nbsp;</span>
         <Button
           disabled={counter === 5}
           className="rounded-btn"
@@ -142,7 +142,7 @@ function CartFunctions({ price, calcFinalAmount, handleDelete, name }) {
         >
           +
         </Button>
-        <span className="delete-svg" onClick={deleteItem}>
+        <span className="delete-svg" onClick={deleteItem} data-testid="delete-item-span">
           <Image src={DeleteIcon} />
         </span>
         <span className="item-base-price">
