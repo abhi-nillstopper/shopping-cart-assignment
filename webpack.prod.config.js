@@ -2,7 +2,7 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const webpack = require("webpack");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
-const dotenv = require("dotenv");
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
   entry: path.join(__dirname, "src", "index.js"),
@@ -16,12 +16,10 @@ module.exports = {
     modules: [path.resolve(__dirname, "src"), "node_modules"],
     extensions: [".js", ".jsx", ".ts", ".tsx"],
   },
-  //   devServer: {
-  //     historyApiFallback: true,
-  //     contentBase: path.join(__dirname, "static"),
-  //     hot: true,
-  //   },
-  //   devtool: "source-map",
+  devServer: {
+    historyApiFallback: true,
+  },
+  devtool: "source-map",
   // moduleDirectories: ["node_modules", "./utils/test-utils.js"],
   module: {
     rules: [
@@ -53,6 +51,7 @@ module.exports = {
     ],
   },
   plugins: [
+    new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       template: path.join(__dirname, "src", "index.html"),
     }),
