@@ -16,6 +16,7 @@ export default function NavigationBar(props) {
 
   const handleLogout = () => {
     localStorage.removeItem("user");
+    localStorage.removeItem("user_id");
     setIsLoggedIn(false);
     history.push("/login");
   };

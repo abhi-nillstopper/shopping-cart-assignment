@@ -16,6 +16,7 @@ export const ContextWrapper = (props) => {
     if (userCartItems && userCartItems.length > 0) {
       return userCartItems.length;
     }
+    localStorage.setItem("numOfProductsInCart", "0");
     return 0;
   };
 
@@ -24,6 +25,7 @@ export const ContextWrapper = (props) => {
     if (items) {
       return items;
     }
+    localStorage.setItem("user_cart_items", "[]");
     return [];
   };
 
