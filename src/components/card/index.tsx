@@ -51,13 +51,14 @@ const Card: React.FC<CardProps> = (props): React.ReactElement => {
       <div className="card-container">
         <h6>{name}</h6>
         <div className="product-image-description">
-          <Image src={imageURL} />
+          <Image alt={name} src={imageURL} />
           <div className="card-description">
             <div> {description}</div>
             <Button
               className="small-screen-btn"
               variant="danger"
               onClick={handleBuy}
+              name="Buy Now"
             >
               Buy Now @ <span>MRP Rs. {price}</span>
             </Button>

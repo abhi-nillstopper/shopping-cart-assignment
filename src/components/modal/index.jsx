@@ -71,7 +71,11 @@ export default function ModalComponent(props) {
             {cartItems.map((item, index) => {
               return (
                 <div className="induvidual-item" key={index}>
-                  <Image className="item-img" src={item.imageURL} />
+                  <Image
+                    alt={item.name}
+                    className="item-img"
+                    src={item.imageURL}
+                  />
                   <div className="product-info">
                     <div>
                       <h6 title={item.name}>{item.name}</h6>
@@ -96,7 +100,7 @@ export default function ModalComponent(props) {
         <Modal.Footer>
           <div>Promo code can be applied on payment page</div>
           <Button className="checkout-btn" variant="danger">
-            Proceed to Checkout &nbsp;&nbsp;&nbsp; Rs.{finalAmount} &nbsp;
+            Proceed to Checkout  Rs.{finalAmount}
           </Button>
         </Modal.Footer>
       </Modal>
@@ -134,7 +138,7 @@ function CartFunctions({ price, calcFinalAmount, handleDelete, name }) {
         >
           -
         </Button>
-        <span data-testid="cart-product-counter">&nbsp;&nbsp;&nbsp;&nbsp; {counter} &nbsp;&nbsp;&nbsp;&nbsp;</span>
+        <span className="item-quantity" data-testid="cart-product-counter">{counter}</span>
         <Button
           disabled={counter === 5}
           className="rounded-btn"
@@ -142,14 +146,15 @@ function CartFunctions({ price, calcFinalAmount, handleDelete, name }) {
         >
           +
         </Button>
-        <span className="delete-svg" onClick={deleteItem} data-testid="delete-item-span">
-          <Image src={DeleteIcon} />
+        <span
+          className="delete-svg"
+          onClick={deleteItem}
+          data-testid="delete-item-span"
+        >
+          <Image alt="delete item" src={DeleteIcon} />
         </span>
-        <span className="item-base-price">
-          &nbsp; x &nbsp;&nbsp;&nbsp;&nbsp; {price}
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        </span>
-        <span className="item-total-price">Rs. &nbsp; {amount}</span>
+        <span className="item-base-price">x {price}</span>
+        <span className="item-total-price">Rs. {amount}</span>
       </div>
     </>
   );

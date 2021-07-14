@@ -22,6 +22,7 @@ export default function ProductCategory(props) {
                   <h2>{img.name}</h2>
                   <h6>{img.description}</h6>
                   <Button
+                    alt={img.name}
                     variant="danger"
                     onClick={() => onCategoryClick(img.key)}
                   >

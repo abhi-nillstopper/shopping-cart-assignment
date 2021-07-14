@@ -32,7 +32,7 @@ export default function NavigationBar(props) {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <span className="main-app-logo">
             <Link to="/">
-              <Image src={Logo_Big} />
+              <Image alt="Sabka Bazaar" src={Logo_Big} />
             </Link>
           </span>
 
@@ -70,7 +70,7 @@ export default function NavigationBar(props) {
           {isLoggedIn && (
             <button className="cart-svg" onClick={toggleModal}>
               <div >
-                <Image src={Cart} />
+                <Image alt="" src={Cart} />
                 {numOfItems}&nbsp;items
               </div>
             </button>
