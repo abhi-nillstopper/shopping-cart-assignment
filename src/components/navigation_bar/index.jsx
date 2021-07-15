@@ -35,21 +35,26 @@ export default function NavigationBar(props) {
               <Image alt="Sabka Bazaar" src={Logo_Big} />
             </Link>
           </span>
-
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="ml-auto">
-              <Nav.Item>
-                <NavLink activeClassName="active-nav-link" to="/" exact>
-                  Home
-                </NavLink>
-              </Nav.Item>
-              <Nav.Item>
-                <NavLink activeClassName="active-nav-link" to="/products" exact>
-                  Products
-                </NavLink>
-              </Nav.Item>
-            </Nav>
-          </Navbar.Collapse>
+          {isLoggedIn && (
+            <Navbar.Collapse id="basic-navbar-nav">
+              <Nav className="ml-auto">
+                <Nav.Item>
+                  <NavLink activeClassName="active-nav-link" to="/" exact>
+                    Home
+                  </NavLink>
+                </Nav.Item>
+                <Nav.Item>
+                  <NavLink
+                    activeClassName="active-nav-link"
+                    to="/products"
+                    exact
+                  >
+                    Products
+                  </NavLink>
+                </Nav.Item>
+              </Nav>
+            </Navbar.Collapse>
+          )}
         </Navbar>
         <div className="user-controls">
           {isLoggedIn ? (
@@ -68,7 +73,11 @@ export default function NavigationBar(props) {
           )}
 
           {isLoggedIn && (
-            <button aria-label="Cart" className="cart-svg" onClick={toggleModal}>
+            <button
+              aria-label="Cart"
+              className="cart-svg"
+              onClick={toggleModal}
+            >
               <div>
                 <Image alt="Cart" src={Cart} />
                 {numOfItems}&nbsp;items
