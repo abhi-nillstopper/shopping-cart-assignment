@@ -73,7 +73,8 @@ $left-space-5: 5%;
               border-color: unset;
             }
 
-            span.delete-svg {
+            button.delete-svg {
+              border: none;
               margin-left: $left-space-5;
               img {
                 height: 20px;

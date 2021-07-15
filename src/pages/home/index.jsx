@@ -49,7 +49,7 @@ export default function HomePage(props) {
   return (
     <>
       <div className="home-container" data-testid="home-container">
-        <Carousel data-testid="carousel-test" fade>
+        <Carousel indicators={false} variant="dark" data-testid="carousel-test" fade>
           {OfferImages.map((ofImg, index) => {
             return (
               <Carousel.Item key={index} interval={2000}>

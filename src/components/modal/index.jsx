@@ -38,7 +38,6 @@ export default function ModalComponent(props) {
   };
 
   const calcFinalAmount = (newAmount, op = "+") => {
-    console.log(finalAmount, op, newAmount);
     if (op === "+") {
       setFinalAmount(finalAmount + newAmount);
     } else {
@@ -46,8 +45,8 @@ export default function ModalComponent(props) {
     }
   };
 
-  const handleDelete = (name) => {
-    const newCartItems = cartItems.filter((obj) => obj.name !== name) || [];
+  const handleDelete = (id) => {
+    const newCartItems = cartItems.filter((obj) => obj.id !== id) || [];
     setCartItems(newCartItems);
     setNumOfItems(newCartItems.length);
     localStorage.setItem("user_cart_items", JSON.stringify(newCartItems));
@@ -84,6 +83,8 @@ export default function ModalComponent(props) {
                       calcFinalAmount={calcFinalAmount}
                       price={item.price}
                       name={item.name}
+                      product_id={item.id}
+                      quantity={item.quantity}
                       handleDelete={handleDelete}
                     />
                   </div>
@@ -100,7 +101,7 @@ export default function ModalComponent(props) {
         <Modal.Footer>
           <div>Promo code can be applied on payment page</div>
           <Button className="checkout-btn" variant="danger">
-            Proceed to Checkout  Rs.{finalAmount}
+            Proceed to Checkout Rs.{finalAmount}
           </Button>
         </Modal.Footer>
       </Modal>
@@ -108,23 +109,48 @@ export default function ModalComponent(props) {
   );
 }
 
-function CartFunctions({ price, calcFinalAmount, handleDelete, name }) {
-  const [counter, setCounter] = useState(1);
+function CartFunctions({
+  price,
+  calcFinalAmount,
+  handleDelete,
+  name,
+  product_id,
+  quantity,
+}) {
+  const [counter, setCounter] = useState(quantity);
   const [amount, setAmount] = useState(price);
+  const { setCartItems } = useContext(UserContext);
+
+  const handleQuantityChange = (operator) => {
+    let user_cart_items = JSON.parse(localStorage.getItem("user_cart_items"));
+    user_cart_items.forEach((product) => {
+      if (product.id === product_id) {
+        if (operator === "+") {
+          product.quantity = parseInt(product.quantity) + 1;
+        } else {
+          product.quantity = parseInt(product.quantity) - 1;
+        }
+      }
+    });
+    localStorage.setItem("user_cart_items", JSON.stringify(user_cart_items));
+    setCartItems(user_cart_items);
+  };
 
   const handlePlus = () => {
+    handleQuantityChange("+");
     setCounter(counter + 1);
     setAmount((counter + 1) * price);
     calcFinalAmount(price);
   };
   const handleMinus = () => {
+    handleQuantityChange("-");
     setCounter(counter - 1);
     setAmount((counter - 1) * price);
     calcFinalAmount(price, "-");
   };
 
   const deleteItem = () => {
-    handleDelete(name);
+    handleDelete(product_id);
     calcFinalAmount(counter * price, "-");
   };
 
@@ -138,21 +164,24 @@ function CartFunctions({ price, calcFinalAmount, handleDelete, name }) {
         >
           -
         </Button>
-        <span className="item-quantity" data-testid="cart-product-counter">{counter}</span>
+        <span className="item-quantity" data-testid="cart-product-counter">
+          {counter}
+        </span>
         <Button
           disabled={counter === 5}
           className="rounded-btn"
+          name="increase quantity"
           onClick={handlePlus}
         >
           +
         </Button>
-        <span
+        <button
           className="delete-svg"
           onClick={deleteItem}
           data-testid="delete-item-span"
         >
           <Image alt="delete item" src={DeleteIcon} />
-        </span>
+        </button>
         <span className="item-base-price">x {price}</span>
         <span className="item-total-price">Rs. {amount}</span>
       </div>
