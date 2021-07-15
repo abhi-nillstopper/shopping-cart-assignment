@@ -38,7 +38,7 @@ div.register-container {
     }
 
     form {
-      width: unset;
+      // width: unset;
       margin-top: 5%;
       margin-left: auto;
       margin-right: auto;
@@ -55,5 +55,13 @@ div.register-container {
   p {
     margin: auto;
     // height: 0.4em;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  div.register-container {
+    form {
+    width: unset;
+    }
   }
 }

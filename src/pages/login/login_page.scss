@@ -27,23 +27,6 @@ div.login-container {
   }
 }
 
-@media screen and (max-width: 992px) {
-  div.login-container {
-    display: grid;
-    // margin-left: 20%;
-    .login-header {
-      margin: auto;
-      text-align: center;
-    }
-    form {
-      width: unset;
-      margin-top: 5%;
-      margin-left: auto;
-      margin-right: auto;
-    }
-  }
-}
-
 .login-alert-container {
   margin-top: 5%;
   width: 100%;
@@ -55,3 +38,30 @@ div.login-container {
     // height: 0.4em;
   }
 }
+
+@media screen and (max-width: 992px) {
+  div.login-container {
+    display: grid;
+    // margin-left: 20%;
+    .login-header {
+      margin: auto;
+      text-align: center;
+    }
+    form {
+      // width: unset;
+      margin-top: 5%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+}
+
+@media screen and (max-width: 640px) {
+  div.login-container {
+    form {
+    width: unset;
+    }
+  }
+}
+
+

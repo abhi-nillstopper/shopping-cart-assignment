@@ -44,8 +44,8 @@ export default function NavigationBar(props) {
                 </NavLink>
               </Nav.Item>
               <Nav.Item>
-                <NavLink activeClassName="active-nav-link" to="/products">
-                  products
+                <NavLink activeClassName="active-nav-link" to="/products" exact>
+                  Products
                 </NavLink>
               </Nav.Item>
             </Nav>

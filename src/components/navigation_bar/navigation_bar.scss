@@ -25,11 +25,13 @@ $box-shadow-fix: 15px 7px 15px 2px #9f9f9f;
       // color: blue;
       text-decoration: underline;
     }
+
+    .active-nav-link {
+      color: #007bff;
+    }
   }
 
-  .active-nav-link {
-    color: #007bff;
-  }
+  
 
   .user-controls {
     display: flex;
