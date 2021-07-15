@@ -161,6 +161,8 @@ function CartFunctions({
           disabled={counter === 0}
           className="rounded-btn"
           onClick={handleMinus}
+          name="decrease quantity"
+          aria-label="decrease quantity"
         >
           -
         </Button>
@@ -171,6 +173,7 @@ function CartFunctions({
           disabled={counter === 5}
           className="rounded-btn"
           name="increase quantity"
+          aria-label="increase quantity"
           onClick={handlePlus}
         >
           +
