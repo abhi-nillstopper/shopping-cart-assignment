@@ -60,7 +60,10 @@ describe("Cart Modal component", () => {
   });
 
   test("- button", (done) => {
-    const decreseItem = screen.getAllByRole("button", { name: /\-/i })[0];
+    const decreseItem = screen.getAllByRole("button", {
+      name: /decrease quantity/i,
+    })[0];
+    // screen.getAllByRole("button", { name: /\-/i })[0];
     fireEvent.click(decreseItem);
     const itemCounter = screen.getAllByTestId("cart-product-counter")[0];
     expect(decreseItem).toBeInTheDocument();
@@ -70,7 +73,10 @@ describe("Cart Modal component", () => {
   });
 
   test("- button", (done) => {
-    const increaseItem = screen.getAllByRole("button", { name: /\+/i })[0];
+    const increaseItem = screen.getAllByRole("button", {
+      name: /increase quantity/i,
+    })[0];
+    // screen.getAllByRole("button", { name: /\+/i })[0];
     fireEvent.click(increaseItem);
     const itemCounter = screen.getAllByTestId("cart-product-counter")[0];
     expect(increaseItem).toBeInTheDocument();

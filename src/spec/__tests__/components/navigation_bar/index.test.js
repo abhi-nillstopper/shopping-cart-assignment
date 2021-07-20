@@ -46,9 +46,12 @@ describe("NavigationBar component", () => {
   });
 
   it("cart button", (done) => {
-    const cart = screen.getByRole("button", {
-      name: /items/i,
+    const cart = screen.getByRole('button', {
+      name: /cart/i
     });
+    // screen.getByRole("button", {
+    //   name: /items/i,
+    // });
 
     localStorage.setItem("user_cart_items", JSON.stringify(cartItems));
 

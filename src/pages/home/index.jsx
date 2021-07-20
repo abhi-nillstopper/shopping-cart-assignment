@@ -40,8 +40,6 @@ export default function HomePage(props) {
     }
   }, []);
 
-  console.log("isDesktop",isDesktop)
-
   // const OfferImages = importAll(
   //   require.context(
   //     "../../../static/images/offers",

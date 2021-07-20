@@ -1,11 +1,12 @@
 import React, { useEffect, useState, useContext, reactc, useMemo } from "react";
-import { Modal, Button, Image } from "react-bootstrap";
+import { Modal, Button, Image, Alert } from "react-bootstrap";
 import { UserContext } from "../../user-context";
 import DeleteIcon from "../../svgs/delete_fill.svg";
 import "./modal.scss";
 
 export default function ModalComponent(props) {
   const [show, setShow] = useState(false);
+  const [showAlert, setShowAlert] = useState(false);
   const { cartItems, numOfItems, setCartItems, setNumOfItems } =
     useContext(UserContext);
 
@@ -52,6 +53,18 @@ export default function ModalComponent(props) {
     localStorage.setItem("user_cart_items", JSON.stringify(newCartItems));
     localStorage.setItem("numOfProductsInCart", newCartItems.length);
   };
+
+  const handleCheckout = ()=>{
+    setShowAlert(true)
+    setCartItems([]);
+    setNumOfItems(0);
+    localStorage.setItem("user_cart_items", "[]");
+    localStorage.setItem("numOfProductsInCart", "0");
+    setTimeout(()=>{
+      setShowAlert(false)
+      handleClose()
+    }, 1500)
+  }
 
   return (
     <>
@@ -100,11 +113,18 @@ export default function ModalComponent(props) {
         </Modal.Body>
         <Modal.Footer>
           <div>Promo code can be applied on payment page</div>
-          <Button className="checkout-btn" variant="danger">
+          <Button onClick={handleCheckout} className="checkout-btn" variant="danger">
             Proceed to Checkout Rs.{finalAmount}
           </Button>
         </Modal.Footer>
       </Modal>
+      {showAlert && (
+        <div className="alert-container">
+          <Alert variant="success">
+            <p>"Order Successfully Placed "</p>
+          </Alert>
+        </div>
+      )}
     </>
   );
 }

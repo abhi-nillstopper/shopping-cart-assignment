@@ -17,7 +17,7 @@ export default function ProductCategory(props) {
           return (
             img.enabled && (
               <div key={img.key} className="category" data-testid="category">
-                <Image src={img.imageUrl} />
+                <Image alt={img.name} src={img.imageUrl} />
                 <div className="description">
                   <h2>{img.name}</h2>
                   <h6>{img.description}</h6>
